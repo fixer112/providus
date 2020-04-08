@@ -14,7 +14,7 @@ class Controller extends BaseController
     public function providus()
     {
 
-        $Client = new \SoapClient('http://154.113.16.142:9999/Payments/api?wsdl');
+        $Client = new \SoapClient(env('PROVIDUS_URL'));
         return $Client;
 
     }
