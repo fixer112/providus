@@ -12,11 +12,14 @@ class Controller extends BaseController
 
     public function providus()
     {
+        ini_set("soap.wsdl_cache_enabled", "0");
+        ini_set('default_socket_timeout', 5000);
+        ini_set('user_agent', 'somerandomuseragent');
 
         $Client = new \SoapClient(env('PROVIDUS_URL'), [
             'trace' => true,
             'keep_alive' => true,
-            'connection_timeout' => 5000,
+            'connection_timeout' => 50000,
             'cache_wsdl' => WSDL_CACHE_NONE,
             'compression' => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP | SOAP_COMPRESSION_DEFLATE,
         ]);
