@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -14,7 +13,13 @@ class Controller extends BaseController
     public function providus()
     {
 
-        $Client = new \SoapClient(env('PROVIDUS_URL'));
+        $Client = new \SoapClient(env('PROVIDUS_URL'), [
+            'trace' => true,
+            'keep_alive' => true,
+            'connection_timeout' => 5000,
+            'cache_wsdl' => WSDL_CACHE_NONE,
+            'compression' => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP | SOAP_COMPRESSION_DEFLATE,
+        ]);
         return $Client;
 
     }
